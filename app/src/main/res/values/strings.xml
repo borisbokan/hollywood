@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">hollywood</string>
+    <string name="imeprezime_glumac">Ime, Prezime</string>
+    <string name="biografija_glumca">Biografija</string>
+    <string name="drawer_otvori">Otvori</string>
+    <string name="drawer_zatvori">zatvori</string>
+</resources>
