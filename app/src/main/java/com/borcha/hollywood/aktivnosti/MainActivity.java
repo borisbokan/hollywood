@@ -1,12 +1,13 @@
-package aktivnosti;
+package com.borcha.hollywood.aktivnosti;
 
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,10 +21,13 @@ import com.borcha.hollywood.R;
 
 import java.util.ArrayList;
 
-import adapteri.DrawMeniAdapter;
-import model.NavigacioniMeni;
+import com.borcha.hollywood.adapteri.DrawMeniAdapter;
+import com.borcha.hollywood.fragmenti.FragmentDetalji;
+import com.borcha.hollywood.fragmenti.FragmentLista;
+import com.borcha.hollywood.model.AdapterPodaci;
+import com.borcha.hollywood.model.NavigacioniMeni;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, FragmentLista.onItemGlumacSelect {
 
 
     private ArrayList<NavigacioniMeni> stavkeDrawera;
@@ -32,11 +36,20 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private RelativeLayout drawerPane;
     private ActionBarDrawerToggle drawerToggle;
+    private boolean landscape;
+    private boolean detaljiPrikaz;
+    private int position;
+    private boolean listaPrikaz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Podaci za obradu
+        AdapterPodaci podaci=new AdapterPodaci();
+        podaci.puniPodatke();
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //DODAJEMO STAVKE ZA DRAWER
-        stavkeDrawera.add(new NavigacioniMeni("Lista glumaca","",R.mipmap.ic_action_glumac));
-        stavkeDrawera.add(new NavigacioniMeni("Podesavanja","Podesavanja  aplikacije",R.mipmap.ic_action_podesavanja));
+        stavkeDrawera.add(new NavigacioniMeni("Lista glumaca", "", R.mipmap.ic_action_glumac));
+        stavkeDrawera.add(new NavigacioniMeni("Podesavanja", "Podesavanja  aplikacije", R.mipmap.ic_action_podesavanja));
 
 
         drawerTitle = getTitle();
@@ -60,12 +73,11 @@ public class MainActivity extends AppCompatActivity {
         drawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
 
 
-
-        DrawMeniAdapter adDrawMeni=new DrawMeniAdapter(this,stavkeDrawera);
+        DrawMeniAdapter adDrawMeni = new DrawMeniAdapter(this, stavkeDrawera);
         drawerList.setAdapter(adDrawMeni);
 
 
-        drawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_otvori,R.string.drawer_zatvori){
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_otvori, R.string.drawer_zatvori) {
             @Override
             public void onDrawerOpened(View drawerView) {
 
@@ -85,59 +97,56 @@ public class MainActivity extends AppCompatActivity {
         drawerList.setOnItemClickListener(this);
 
 
-        if(savedInstanceState==null){
+        if (savedInstanceState == null) {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ListaFragment listaFragment= new ListaFragment();
-            ft.add(R.id.exlist_fragment, listaFragment, "lista_fragment");
+            FragmentLista listaFragment = FragmentLista.newInstance(podaci.getlistaGlumaca());
+            ft.add(R.id.lvListaGlumaca_lista, listaFragment, "lista_fragment");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
 
-        if (findViewById(R.id.detalji_fragment) != null) {
+        if (findViewById(R.id.detalji_frame_fragment) != null) {
             landscape = true;
             getFragmentManager().popBackStack();
 
-            DetaljiFragment detaljiFragment = (DetaljiFragment) getFragmentManager().findFragmentById(R.id.detalji_fragment);
+            FragmentDetalji detaljiFragment = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
             if (detaljiFragment == null) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                detaljiFragment = new DetaljiFragment();
-                ft.replace(R.id.detalji_fragment, detaljiFragment, "detalji_fragment");
+                detaljiFragment = new FragmentDetalji();
+                ft.replace(R.id.detalji_frame_fragment, detaljiFragment, "detalji_fragment");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
-                detaljiPrikaz=true;
+                detaljiPrikaz = true;
             }
         }
 
     }
 
-
     @Override
-    public void onItemSelected(int group, int position) {
-        this.groPos=group;
-        this.position=position;
+    public void onGlumacSelect(int position) {
+        this.position = position;
 
         if (landscape) {
             // If the device is in the landscape mode updates detail fragment's content.
-            DetaljiFragment detaljiFragment = (DetaljiFragment) getFragmentManager().findFragmentById(R.id.detalji_fragment);
-            detaljiFragment.updateContent(group,position);
+            FragmentDetalji detaljiFragment = new FragmentDetalji();
+            getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
+            detaljiFragment.updateContent(position);
         } else {
             // If the device is in the portrait mode sets detail fragment's content and replaces master fragment with detail fragment in a fragment transaction.
-            DetaljiFragment detaljiFragment = new DetaljiFragment();
-            detaljiFragment.setContent(group,position);
+            FragmentDetalji detaljiFragment = new FragmentDetalji();
+            detaljiFragment.setContent(position);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.exlist_fragment, detaljiFragment, "detalji_fragment_2");
+            ft.replace(R.id.lista_frame_fragment, detaljiFragment, "detalji_fragment_2");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
         }
 
 
-
-        listaPrikaz=true;
-        detaljiPrikaz=false;
+        listaPrikaz = true;
+        detaljiPrikaz = false;
     }
-
 
 
 
@@ -145,12 +154,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        switch (i){
+        switch (i) {
             case 0:
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ListaFragment listaFragment= new ListaFragment();
-                ft.replace(R.id.exlist_fragment, listaFragment, "lista_fragment_3");
+                FragmentLista listaFragment = new FragmentLista();
+                ft.replace(R.id.lista_frame_fragment, listaFragment, "lista_fragment_3");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
 
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             case 1:
-                Intent settings = new Intent(FirstActivity.this,PodesavanjaActivty.class);
+                Intent settings = new Intent(MainActivity.this, PodesavanjaActivity.class);
                 startActivity(settings);
 
                 break;
@@ -171,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -181,14 +189,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_dodaj_jelo:
-                Toast.makeText(this, "Action " + getString(R.string.fragment_dodaj_jelo) , Toast.LENGTH_SHORT).show();
+            case R.id.menu_novi_glumac:
+                Toast.makeText(this, "Action " + getString(R.string.dodaj_glumca), Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menu_prepravi_jelo:
-                Toast.makeText(this, "Action " + getString(R.string.fragment_prepravi_jelo), Toast.LENGTH_SHORT).show();
+            case R.id.menu_ispravi_glumac:
+                Toast.makeText(this, "Action " + getString(R.string.ispravi_glumca), Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menu_obrisi_jelo:
-                Toast.makeText(this, "Action " + getString(R.string.fragment_obrisi_jelo) , Toast.LENGTH_SHORT).show();
+            case R.id.menu_obrisi_glumac:
+                Toast.makeText(this, "Action " + getString(R.string.obrisi_glumca), Toast.LENGTH_SHORT).show();
                 break;
         }
 
@@ -196,12 +204,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void setTitle(CharSequence title) {
         getSupportActionBar().setTitle(title);
     }
-
 
 
     // Method(s) that manage NavigationDrawer.
@@ -225,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+}
 
-}
-}
+
+

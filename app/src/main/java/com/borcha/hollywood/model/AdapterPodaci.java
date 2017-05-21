@@ -1,4 +1,4 @@
-package model;
+package com.borcha.hollywood.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,20 +6,19 @@ import java.util.Date;
 /**
  * Created by borcha on 20.05.17..
  */
-public class AdapterGlumci {
-    private static ArrayList<Glumac> _glumciFilmovi;
+public class AdapterPodaci {
+    private  ArrayList<Glumac> _glumciFilmovi;
 
-    public static ArrayList<Glumac > listaGlumci() {
+    public  ArrayList<Glumac> getlistaGlumaca() {
         return _glumciFilmovi;
     }
 
 
-
     //podaci
-    private void puniPodatke() {
+    public void puniPodatke() {
         /*   Mat Damon
         http://www.imdb.com/name/nm0000354/?ref_=tt_cl_t1   */
-        Glumac MatDaemon = new Glumac(1, " Mat", "Damon", new Date(1970, 10, 8), null, 87328782);
+        Glumac MatDaemon = new Glumac(1, " Mat", "Damon", new Date(1970, 10, 8), null,3.05f, "Matt Damon.jpg");
         MatDaemon.setBiografija(getBiografija(1));
 
         MatDaemon.addFilmovi(new Film(0, "Incorporated (TV Series) ", "2016", MatDaemon));
@@ -31,7 +30,7 @@ public class AdapterGlumci {
         /*Charlotte Riley
         http://www.imdb.com/name/nm2731660/bio?ref_=nm_ov_bio_sm*/
 
-        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 12, 29), null, 87328782);
+        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 12, 29), null,4.5f, "Charlotte Riley.jpg");
         MatDaemon.setBiografija(getBiografija(2));
 
         CharlotteRiley.addFilmovi(new Film(0, "Close to the Enemy (TV Series) ", "2016", CharlotteRiley));
@@ -41,7 +40,7 @@ public class AdapterGlumci {
         /*
         Colin Firth
         http://www.imdb.com/name/nm0000147/bio?ref_=nm_ov_bio_sm     */
-        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 10, 8), null, 87328782);
+        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 10, 8), null,4.3f, "Colin Firth.jpg");
         ColinFirth.setBiografija(getBiografija(3));
 
         ColinFirth.addFilmovi(new Film(0, "Mamma Mia: Here We Go Again", "2018", ColinFirth));
@@ -52,7 +51,7 @@ public class AdapterGlumci {
 
           /*  Jessica Chastain
         http://www.imdb.com/name/nm1567113/bio?ref_=nm_ov_bio_sm*/
-        Glumac JessicaChastain=new Glumac(4,"Jessica", "Chastain", new Date(1974, 3, 24), null, 87328782);
+        Glumac JessicaChastain = new Glumac(4, "Jessica", "Chastain", new Date(1974, 3, 24), null,3.7f, "Jessica Chastain.jpg");
         JessicaChastain.setBiografija(getBiografija(4));
 
         JessicaChastain.addFilmovi(new Film(0, "Molly's Game", "2016", JessicaChastain));
@@ -61,7 +60,7 @@ public class AdapterGlumci {
 
 
           /*Jude Law*/
-        Glumac JudeLaw=new Glumac(5,"Jude", "Low", new Date(1972, 12, 29), null, 87328782);
+        Glumac JudeLaw = new Glumac(5, "Jude", "Low", new Date(1972, 12, 29), null,3.6f, "Jude Law.jpg");
         JudeLaw.setBiografija(getBiografija(5));
 
         JudeLaw.addFilmovi(new Film(0, "The Vote ", "2015", JudeLaw));
@@ -70,7 +69,7 @@ public class AdapterGlumci {
 
        /*Julianne Moore
         http://www.imdb.com/name/nm0000194/bio?ref_=nm_ov_bio_sm*/
-        Glumac JulianneMoore=new Glumac(6,"Julianne", "Moore", new Date(1960, 12, 3), null, 87328782);
+        Glumac JulianneMoore = new Glumac(6, "Julianne", "Moore", new Date(1960, 12, 3), null,4.4f, "Julianne Moore.jpg");
         JulianneMoore.setBiografija(getBiografija(6));
 
         JulianneMoore.addFilmovi(new Film(0, "Wonderstruck ", "2016", JulianneMoore));
@@ -82,7 +81,7 @@ public class AdapterGlumci {
         Nicole  Kidman
         http://www.imdb.com/name/nm0000173/bio?ref_=nm_ov_bio_sm
          */
-        Glumac  NicoleKidman=new Glumac(7,"Nicole", "Kidman", new Date(1967, 6, 20), null, 87328782);
+        Glumac NicoleKidman = new Glumac(7, "Nicole", "Kidman", new Date(1967, 6, 20), null,3.7f, "Nicole  Kidman.jpg");
         NicoleKidman.setBiografija(getBiografija(7));
 
         NicoleKidman.addFilmovi(new Film(0, "Aquaman", "2018", NicoleKidman));
@@ -93,7 +92,7 @@ public class AdapterGlumci {
         /*
         Renee Zellweger
         http://www.imdb.com/name/nm0000250/bio?ref_=nm_ov_bio_sm */
-        Glumac ReneeZellweger=new Glumac(8,"Reene", "Zellweger", new Date(1969, 4, 25), null, 87328782);
+        Glumac ReneeZellweger = new Glumac(8, "Reene", "Zellweger", new Date(1969, 4, 25), null,3.3f, "Renee Zellweger.jpg");
         ReneeZellweger.setBiografija(getBiografija(8));
 
         ReneeZellweger.addFilmovi(new Film(0, "Beba Bridžit Džons ", "2016", ReneeZellweger));
@@ -106,12 +105,11 @@ public class AdapterGlumci {
         Tom Hiddleston
         http://www.imdb.com/name/nm1089991/bio?ref_=nm_ov_bio_sm
            */
-        Glumac TomHiddleston = new Glumac(9, "Tom", "Hiddleston", new Date(1954, 9, 13), null, 87328782);
+        Glumac TomHiddleston = new Glumac(9, "Tom", "Hiddleston", new Date(1954, 9, 13), null,4.3f, "tom_hiddleston.jpg");
         TomHiddleston.setBiografija(getBiografija(9));
         TomHiddleston.addFilmovi(new Film(5, "Skull Island ", "2017", TomHiddleston));
         TomHiddleston.addFilmovi(new Film(6, "Crimson Peak", "2015", TomHiddleston));
         TomHiddleston.addFilmovi(new Film(7, "High-Rise", "2015", TomHiddleston));
-
 
 
         _glumciFilmovi.add(MatDaemon);
@@ -126,9 +124,6 @@ public class AdapterGlumci {
 
 
     }
-
-
-
 
 
     //Biografije

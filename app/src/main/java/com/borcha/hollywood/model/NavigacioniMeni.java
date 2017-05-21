@@ -1,4 +1,4 @@
-package model;
+package com.borcha.hollywood.model;
 
 /**
  * Created by borcha on 17.05.17..
@@ -12,10 +12,10 @@ public class NavigacioniMeni {
     private int ikona;
 
 
-    public NavigacioniMeni(String _naslov, String _opis, int _ikona){
-        this.naslov=_naslov;
-        this.opis=_opis;
-        this.ikona=_ikona;
+    public NavigacioniMeni(String _naslov, String _opis, int _ikona) {
+        this.naslov = _naslov;
+        this.opis = _opis;
+        this.ikona = _ikona;
     }
 
     public String getNaslov() {

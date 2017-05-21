@@ -1,4 +1,4 @@
-package aktivnosti;
+package com.borcha.hollywood.aktivnosti;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

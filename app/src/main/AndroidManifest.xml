@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="aktivnosti.MainActivity">
+        <activity android:name="com.borcha.hollywood.aktivnosti.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,9 +16,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="aktivnosti.PodesavanjaActivity">
+        <activity android:name="com.borcha.hollywood.aktivnosti.PodesavanjaActivity">
             android:label="@string/podesavanja"
-            android:parentActivityName="aktivnosti.MainActivity>
+            android:parentActivityName="com.borcha.hollywood.aktivnosti.MainActivity>
         </activity>
     </application>
 

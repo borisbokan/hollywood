@@ -1,4 +1,4 @@
-package model;
+package com.borcha.hollywood.model;
 
 /**
  * Created by borcha on 20.05.17..
@@ -7,15 +7,15 @@ public class Film {
 
     private int id;
     private String nazivFilma;
-    private String  godina;
+    private String godina;
     private Glumac glumac;
 
 
-    public Film(int _id,String _nazivFilma,String _godina,Glumac _glumac){
-        this.id=_id;
-        this.nazivFilma=_nazivFilma;
-        this.godina=_godina;
-        this.glumac=_glumac;
+    public Film(int _id, String _nazivFilma, String _godina, Glumac _glumac) {
+        this.id = _id;
+        this.nazivFilma = _nazivFilma;
+        this.godina = _godina;
+        this.glumac = _glumac;
     }
 
     public int getId() {
@@ -51,7 +51,7 @@ public class Film {
     }
 
 
-    public String toString(){
+    public String toString() {
         return "Film>> " + id + " - " + nazivFilma + " (" + godina + ") " + glumac.getPrezime() + ", " + glumac.getIme();
     }
 }

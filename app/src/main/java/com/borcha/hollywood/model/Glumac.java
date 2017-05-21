@@ -1,12 +1,8 @@
-package model;
+package com.borcha.hollywood.model;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by borcha on 20.05.17..
@@ -19,23 +15,25 @@ public class Glumac {
     private String biografija;
     private Date datumRodjenja;
     private Date datumSmrti;
-    private int slika;
+    private float rejting;
+    private String slika;
 
     private ArrayList<Film> filmovi;
 
-    public Glumac(){
-        filmovi=new ArrayList<>();
+    public Glumac() {
+        filmovi = new ArrayList<>();
     }
 
-    public Glumac(int _id,String _ime,String _prezime,Date _datumRodjenja,Date _datumSmrti,int _slika){
-        this.id=_id;
-        this.ime=_ime;
-        this.prezime=_prezime;
-        this.datumRodjenja=_datumRodjenja;
-        this.datumSmrti=_datumSmrti;
-        this.slika=_slika;
+    public Glumac(int _id, String _ime, String _prezime, Date _datumRodjenja, Date _datumSmrti,float _rejting, String _slika) {
+        this.id = _id;
+        this.ime = _ime;
+        this.prezime = _prezime;
+        this.datumRodjenja = _datumRodjenja;
+        this.datumSmrti = _datumSmrti;
+        this.rejting=_rejting;
+        this.slika = _slika;
 
-        filmovi=new ArrayList<>();
+        filmovi = new ArrayList<>();
     }
 
 
@@ -87,11 +85,11 @@ public class Glumac {
         this.datumSmrti = datumSmrti;
     }
 
-    public int getSlika() {
+    public String getSlika() {
         return slika;
     }
 
-    public void setSlika(int slika) {
+    public void setSlika(String slika) {
         this.slika = slika;
     }
 
@@ -107,27 +105,35 @@ public class Glumac {
         this.filmovi.add(_film);
     }
 
-    public String toString(){
+    public float getRejting() {
+        return rejting;
+    }
+
+    public void setRejting(float rejting) {
+        this.rejting = rejting;
+    }
+
+    public String toString() {
         return "Glumac>> " + id + " - " + ime + " " + prezime + " " + datumRodjenja + " / " + datumSmrti;
     }
 
 
-    //pomocne metode
-    public int godineZivota(Date _datumRodjenja,Date _datumSmrti){
-        long rezul=0l;
+    //com.borcha.hollywood.pomocne metode
+    public int godineZivota(Date _datumRodjenja, Date _datumSmrti) {
+        long rezul = 0l;
 
-       if(datumSmrti!=null){
-            long datum=_datumSmrti.getTime()-_datumRodjenja.getTime();
-            rezul= TimeUnit.MILLISECONDS.toDays(datum)/365;
+        if (datumSmrti != null) {
+            long datum = _datumSmrti.getTime() - _datumRodjenja.getTime();
+            rezul = TimeUnit.MILLISECONDS.toDays(datum) / 365;
 
-            return (int)rezul;
-        }else{
-           Date danas=new Date();
-            long brojDanaDanas= danas.getTime() / 1000 * 60 * 60 * 24;
-            long datum=brojDanaDanas -_datumRodjenja.getTime();
-            rezul= TimeUnit.MILLISECONDS.toDays(datum)/365;
+            return (int) rezul;
+        } else {
+            Date danas = new Date();
+            long brojDanaDanas = danas.getTime() / 1000 * 60 * 60 * 24;
+            long datum = brojDanaDanas - _datumRodjenja.getTime();
+            rezul = TimeUnit.MILLISECONDS.toDays(datum) / 365;
 
-            return (int)rezul;
+            return (int) rezul;
         }
 
 

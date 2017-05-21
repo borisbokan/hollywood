@@ -1,4 +1,4 @@
-package adapteri;
+package com.borcha.hollywood.adapteri;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import com.borcha.hollywood.R;
 
 import java.util.ArrayList;
 
-import model.NavigacioniMeni;
+import com.borcha.hollywood.model.NavigacioniMeni;
 
 /**
  * Created by borcha on 17.05.17..
@@ -23,27 +23,27 @@ public class DrawMeniAdapter extends ArrayAdapter<NavigacioniMeni> {
     private Context cont;
     private ArrayList<NavigacioniMeni> stavke;
     private ImageView imgvIkonaStavke;
-    private TextView txvTitl,txvOpis;
+    private TextView txvTitl, txvOpis;
 
 
     public DrawMeniAdapter(Context context, ArrayList<NavigacioniMeni> _stavke) {
-        super(context, R.layout.draw_meni_stavka,_stavke);
-        cont=context;
-        stavke=_stavke;
+        super(context, R.layout.draw_meni_stavka, _stavke);
+        cont = context;
+        stavke = _stavke;
     }
 
 
     @Override
-    public View getView(int position, View convertView,  ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        LayoutInflater ly=(LayoutInflater)cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView=ly.inflate(R.layout.draw_meni_stavka,null);
+        LayoutInflater ly = (LayoutInflater) cont.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = ly.inflate(R.layout.draw_meni_stavka, null);
 
-        imgvIkonaStavke=(ImageView)convertView.findViewById(R.id.imgvIkona_drwrmenu_item);
-        txvTitl=(TextView)convertView.findViewById(R.id.txvTitl_drwrmenu_item);
-        txvOpis=(TextView)convertView.findViewById(R.id.txvOpis_drwrmenu_item);
+        imgvIkonaStavke = (ImageView) convertView.findViewById(R.id.imgvIkona_drwrmenu_item);
+        txvTitl = (TextView) convertView.findViewById(R.id.txvTitl_drwrmenu_item);
+        txvOpis = (TextView) convertView.findViewById(R.id.txvOpis_drwrmenu_item);
 
-        NavigacioniMeni navMeni=getItem(position);
+        NavigacioniMeni navMeni = getItem(position);
 
         imgvIkonaStavke.setImageResource(navMeni.getIkona());
         txvTitl.setText(navMeni.getNaslov());

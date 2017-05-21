@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/menu_prepravi_jelo"/>
+    <item android:title="@string/dodaj_glumca"
+        android:id="@+id/menu_novi_glumac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <item android:title="@string/ispravi_glumca"
+        android:id="@+id/menu_ispravi_glumac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <item android:title="@string/obrisi_glumca"
+        android:id="@+id/menu_obrisi_glumac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </menu>
