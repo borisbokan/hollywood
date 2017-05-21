@@ -1,6 +1,7 @@
 package com.borcha.hollywood.adapteri;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -20,15 +21,15 @@ import com.borcha.hollywood.pomocne.SlikaGlumca;
 
 public class AdapterGlumac extends ArrayAdapter<Glumac> {
 
-    private final ArrayList<Glumac> glumci;
+
     Context con;
     ImageView imgGlumac;
-    TextView imePrezime;
+    TextView imePrezime,datumRodSmr;
 
     public AdapterGlumac(Context context, ArrayList<Glumac> _glumci) {
-        super(context, R.layout.stavka_liste_glumca);
+        super(context, R.layout.stavka_liste_glumca,_glumci);
         con = context;
-        glumci = _glumci;
+
 
     }
 
@@ -36,13 +37,22 @@ public class AdapterGlumac extends ArrayAdapter<Glumac> {
     @Override
     public View getView(int position, View vi, ViewGroup parent) {
 
+        LayoutInflater ly=(LayoutInflater)con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        vi=ly.inflate(R.layout.stavka_liste_glumca,null);
+
         Glumac glumac = this.getItem(position);
 
         imgGlumac = (ImageView) vi.findViewById(R.id.slika_glumca_stavka);
         imePrezime = (TextView) vi.findViewById(R.id.txvPrezimeIme_stavka);
+        datumRodSmr=(TextView)vi.findViewById(R.id.txvGodinaRodjenjaSmrti_stavka);
 
-        imgGlumac.setImageDrawable(SlikaGlumca.getSlikaGlum(con,glumac.getSlika()));
+        final SlikaGlumca slika=new SlikaGlumca();
+
+        imgGlumac.setImageDrawable(slika.getSlikaGlumca(con,glumac.getSlika()));
         imePrezime.setText(glumac.getIme() + ", " + glumac.getPrezime());
+        datumRodSmr.setText(glumac.getDatumRodjenja().toString());
+
+        vi.setTag(glumac);
 
         return vi;
     }

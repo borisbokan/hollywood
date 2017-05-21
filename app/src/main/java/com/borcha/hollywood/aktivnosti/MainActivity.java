@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean detaljiPrikaz;
     private int position;
     private boolean listaPrikaz;
+    private AdapterPodaci podaci;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +48,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         //Podaci za obradu
-        AdapterPodaci podaci=new AdapterPodaci();
+        podaci=new AdapterPodaci();
         podaci.puniPodatke();
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        actionBar.setTitle(R.string.app_name);
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -62,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             actionBar.show();
         }
 
+        stavkeDrawera=new ArrayList<>();
         //DODAJEMO STAVKE ZA DRAWER
         stavkeDrawera.add(new NavigacioniMeni("Lista glumaca", "", R.mipmap.ic_action_glumac));
         stavkeDrawera.add(new NavigacioniMeni("Podesavanja", "Podesavanja  aplikacije", R.mipmap.ic_action_podesavanja));
@@ -100,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (savedInstanceState == null) {
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            FragmentLista listaFragment = FragmentLista.newInstance(podaci.getlistaGlumaca());
-            ft.add(R.id.lvListaGlumaca_lista, listaFragment, "lista_fragment");
+            FragmentLista listaFragment = new FragmentLista(this,podaci.getlistaGlumaca());
+            ft.add(R.id.lista_frame_fragment, listaFragment, "lista_fragment");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
@@ -113,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             FragmentDetalji detaljiFragment = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
             if (detaljiFragment == null) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                detaljiFragment = new FragmentDetalji();
-                ft.replace(R.id.detalji_frame_fragment, detaljiFragment, "detalji_fragment");
+                detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
+                ft.replace(R.id.lista_frame_fragment, detaljiFragment, "detalji_fragment");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
                 detaljiPrikaz = true;
@@ -129,12 +132,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         if (landscape) {
             // If the device is in the landscape mode updates detail fragment's content.
-            FragmentDetalji detaljiFragment = new FragmentDetalji();
+            FragmentDetalji detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
             getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
             detaljiFragment.updateContent(position);
         } else {
             // If the device is in the portrait mode sets detail fragment's content and replaces master fragment with detail fragment in a fragment transaction.
-            FragmentDetalji detaljiFragment = new FragmentDetalji();
+            FragmentDetalji detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
             detaljiFragment.setContent(position);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.lista_frame_fragment, detaljiFragment, "detalji_fragment_2");
@@ -158,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 0:
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                FragmentLista listaFragment = new FragmentLista();
+                FragmentLista listaFragment = new FragmentLista(this,podaci.getlistaGlumaca());
                 ft.replace(R.id.lista_frame_fragment, listaFragment, "lista_fragment_3");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();

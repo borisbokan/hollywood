@@ -5,16 +5,22 @@
     <item android:title="@string/dodaj_glumca"
         android:id="@+id/menu_novi_glumac"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:icon="@mipmap/ic_dodaj_glumca"
+        app:showAsAction="ifRoom"/>
 
     <item android:title="@string/ispravi_glumca"
         android:id="@+id/menu_ispravi_glumac"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:icon="@mipmap/ic_ispravi_glumca"
+        app:showAsAction="ifRoom"/>
 
     <item android:title="@string/obrisi_glumca"
         android:id="@+id/menu_obrisi_glumac"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:icon="@mipmap/ic_obrisi_glumca"
+        app:showAsAction="ifRoom"/>
 
 </menu>

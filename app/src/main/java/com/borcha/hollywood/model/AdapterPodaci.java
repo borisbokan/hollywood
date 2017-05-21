@@ -16,6 +16,8 @@ public class AdapterPodaci {
 
     //podaci
     public void puniPodatke() {
+
+        _glumciFilmovi=new ArrayList<>();
         /*   Mat Damon
         http://www.imdb.com/name/nm0000354/?ref_=tt_cl_t1   */
         Glumac MatDaemon = new Glumac(1, " Mat", "Damon", new Date(1970, 10, 8), null,3.05f, "Matt Damon.jpg");

@@ -16,9 +16,9 @@ import java.io.InputStream;
 
 public class SlikaGlumca {
 
-    private static Context cont;
+    private  Context cont;
 
-    public static Drawable getSlikaGlum(Context _cont,String _patchFileSlika){
+    public  Drawable getSlikaGlumca(Context _cont,String _patchFileSlika){
         cont=_cont;
 
         Drawable drawable=null;
