@@ -16,18 +16,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.borcha.hollywood.R;
-
 import java.util.ArrayList;
-
+import com.borcha.hollywood.adapteri.AdapterGlumac;
 import com.borcha.hollywood.adapteri.DrawMeniAdapter;
 import com.borcha.hollywood.fragmenti.FragmentDetalji;
 import com.borcha.hollywood.fragmenti.FragmentLista;
 import com.borcha.hollywood.model.AdapterPodaci;
 import com.borcha.hollywood.model.NavigacioniMeni;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, FragmentLista.onItemGlumacSelect {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
 
 
     private ArrayList<NavigacioniMeni> stavkeDrawera;
@@ -36,20 +34,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private DrawerLayout drawerLayout;
     private RelativeLayout drawerPane;
     private ActionBarDrawerToggle drawerToggle;
-    private boolean landscape;
-    private boolean detaljiPrikaz;
+    private boolean landscape=false;
+
     private int position;
-    private boolean listaPrikaz;
-    private AdapterPodaci podaci;
+
+    private AdapterPodaci adPodaci;
+    public static AdapterGlumac adGlumci;
+    private boolean samolista=false;
+    private boolean listaIdetalji=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Podaci za obradu
-        podaci=new AdapterPodaci();
-        podaci.puniPodatke();
+        //adPodaci za obradu
+        adPodaci=new AdapterPodaci();
+        adPodaci.puniPodatke();
+        //Adapter glumci!!!!!!!!
+        adGlumci=new AdapterGlumac(this,this.adPodaci.getlistaGlumaca());
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -100,55 +104,68 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         drawerList.setOnItemClickListener(this);
 
 
-        if (savedInstanceState == null) {
+        // Manages fragments
 
+        // If the activity is started for the first time create master fragment
+        if (savedInstanceState == null) {
+            // FragmentTransaction is a set of changes (e.g. adding, removing and replacing fragments) that you want to perform at the same time.
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            FragmentLista listaFragment = new FragmentLista(this,podaci.getlistaGlumaca());
-            ft.add(R.id.lista_frame_fragment, listaFragment, "lista_fragment");
+            FragmentLista fragmentLista = new FragmentLista();
+            ft.add(R.id.lista_frame_fragment, fragmentLista, "lista_Fragment_1");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
 
-        if (findViewById(R.id.detalji_frame_fragment) != null) {
+        // If the device is in the landscape mode and the detail fragment is null create detail fragment
+        if (findViewById(R.id.detalji_frame_fragment)!=null) {
             landscape = true;
             getFragmentManager().popBackStack();
 
-            FragmentDetalji detaljiFragment = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
-            if (detaljiFragment == null) {
+            FragmentDetalji fragmentdetalji = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
+            if (fragmentdetalji == null) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
-                ft.replace(R.id.lista_frame_fragment, detaljiFragment, "detalji_fragment");
+                fragmentdetalji = new FragmentDetalji();
+                ft.replace(R.id.detalji_frame_fragment, fragmentdetalji, "detalji_fragment_1");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
-                detaljiPrikaz = true;
+                listaIdetalji = true;
             }
         }
 
+        samolista = true;
+        listaIdetalji = false;
+        position = 0;
     }
+
+
 
     @Override
     public void onGlumacSelect(int position) {
-        this.position = position;
+       this.position = position;
+
+        // Shows a toast message (a pop-up message)
+        //Toast.makeText(getBaseContext(), "FirstActivity.onItemSelected()", Toast.LENGTH_SHORT).show();
 
         if (landscape) {
             // If the device is in the landscape mode updates detail fragment's content.
-            FragmentDetalji detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
-            getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
-            detaljiFragment.updateContent(position);
+            FragmentDetalji detaFrag = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
+            detaFrag.updateContent(this.position);
         } else {
             // If the device is in the portrait mode sets detail fragment's content and replaces master fragment with detail fragment in a fragment transaction.
-            FragmentDetalji detaljiFragment = new FragmentDetalji(this,podaci.getlistaGlumaca());
-            detaljiFragment.setContent(position);
+            FragmentDetalji detaljifrag = new FragmentDetalji();
+            detaljifrag.setContent(position);
+
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.lista_frame_fragment, detaljiFragment, "detalji_fragment_2");
+            ft.replace(R.id.lista_frame_fragment, detaljifrag, "detalji_fragment_2");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
+
+           samolista = false;
+           listaIdetalji = true;
         }
 
 
-        listaPrikaz = true;
-        detaljiPrikaz = false;
     }
 
 
@@ -161,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 0:
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                FragmentLista listaFragment = new FragmentLista(this,podaci.getlistaGlumaca());
-                ft.replace(R.id.lista_frame_fragment, listaFragment, "lista_fragment_3");
+                FragmentLista listaFragment = new FragmentLista();
+                ft.replace(R.id.lista_frame_fragment, listaFragment, "lista_fragment_4");
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
 
@@ -178,9 +195,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         drawerList.setItemChecked(i, true);
-        setTitle(stavkeDrawera.get(i).getNaslov());
         drawerLayout.closeDrawer(drawerPane);
     }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (landscape) {
+            finish();
+        } else if (samolista == true) {
+            finish();
+        } else if (listaIdetalji == true) {
+            getFragmentManager().popBackStack();
+            FragmentLista masterFragment = new FragmentLista();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.lista_frame_fragment, masterFragment, "lista_grafment_4");
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+            samolista = true;
+            listaIdetalji = false;
+        }
+
+    }
+
+
+
 
 
     @Override
@@ -231,6 +271,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         // Pass any configuration change to the drawer toggle
         drawerToggle.onConfigurationChanged(configuration);
+    }
+
+
+    public static AdapterGlumac getAdapterGlumci(){
+        return adGlumci;
     }
 
 

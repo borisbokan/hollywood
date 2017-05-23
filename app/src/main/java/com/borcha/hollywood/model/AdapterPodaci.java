@@ -20,7 +20,7 @@ public class AdapterPodaci {
         _glumciFilmovi=new ArrayList<>();
         /*   Mat Damon
         http://www.imdb.com/name/nm0000354/?ref_=tt_cl_t1   */
-        Glumac MatDaemon = new Glumac(1, " Mat", "Damon", new Date(1970, 10, 8), null,3.05f, "Matt Damon.jpg");
+        Glumac MatDaemon = new Glumac(1, " Mat", "Damon", new Date(1970, 10, 8), null,3.05f, "MattDamon.jpg");
         MatDaemon.setBiografija(getBiografija(1));
 
         MatDaemon.addFilmovi(new Film(0, "Incorporated (TV Series) ", "2016", MatDaemon));
@@ -32,8 +32,8 @@ public class AdapterPodaci {
         /*Charlotte Riley
         http://www.imdb.com/name/nm2731660/bio?ref_=nm_ov_bio_sm*/
 
-        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 12, 29), null,4.5f, "Charlotte Riley.jpg");
-        MatDaemon.setBiografija(getBiografija(2));
+        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 12, 29), null,4.5f, "CharlotteRiley.jpg");
+        CharlotteRiley.setBiografija(getBiografija(2));
 
         CharlotteRiley.addFilmovi(new Film(0, "Close to the Enemy (TV Series) ", "2016", CharlotteRiley));
         CharlotteRiley.addFilmovi(new Film(1, "London Has Fallen", "2016", CharlotteRiley));
@@ -42,7 +42,7 @@ public class AdapterPodaci {
         /*
         Colin Firth
         http://www.imdb.com/name/nm0000147/bio?ref_=nm_ov_bio_sm     */
-        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 10, 8), null,4.3f, "Colin Firth.jpg");
+        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 10, 8), null,4.3f, "ColinFirth.jpg");
         ColinFirth.setBiografija(getBiografija(3));
 
         ColinFirth.addFilmovi(new Film(0, "Mamma Mia: Here We Go Again", "2018", ColinFirth));
@@ -53,7 +53,7 @@ public class AdapterPodaci {
 
           /*  Jessica Chastain
         http://www.imdb.com/name/nm1567113/bio?ref_=nm_ov_bio_sm*/
-        Glumac JessicaChastain = new Glumac(4, "Jessica", "Chastain", new Date(1974, 3, 24), null,3.7f, "Jessica Chastain.jpg");
+        Glumac JessicaChastain = new Glumac(4, "Jessica", "Chastain", new Date(1974, 3, 24), null,3.7f, "JessicaChastain.jpg");
         JessicaChastain.setBiografija(getBiografija(4));
 
         JessicaChastain.addFilmovi(new Film(0, "Molly's Game", "2016", JessicaChastain));
@@ -62,7 +62,7 @@ public class AdapterPodaci {
 
 
           /*Jude Law*/
-        Glumac JudeLaw = new Glumac(5, "Jude", "Low", new Date(1972, 12, 29), null,3.6f, "Jude Law.jpg");
+        Glumac JudeLaw = new Glumac(5, "Jude", "Low", new Date(1972, 12, 29), null,3.6f, "JudeLaw.jpg");
         JudeLaw.setBiografija(getBiografija(5));
 
         JudeLaw.addFilmovi(new Film(0, "The Vote ", "2015", JudeLaw));
@@ -71,7 +71,7 @@ public class AdapterPodaci {
 
        /*Julianne Moore
         http://www.imdb.com/name/nm0000194/bio?ref_=nm_ov_bio_sm*/
-        Glumac JulianneMoore = new Glumac(6, "Julianne", "Moore", new Date(1960, 12, 3), null,4.4f, "Julianne Moore.jpg");
+        Glumac JulianneMoore = new Glumac(6, "Julianne", "Moore", new Date(1960, 12, 3), null,4.4f, "JulianneMoore.jpg");
         JulianneMoore.setBiografija(getBiografija(6));
 
         JulianneMoore.addFilmovi(new Film(0, "Wonderstruck ", "2016", JulianneMoore));
@@ -83,7 +83,7 @@ public class AdapterPodaci {
         Nicole  Kidman
         http://www.imdb.com/name/nm0000173/bio?ref_=nm_ov_bio_sm
          */
-        Glumac NicoleKidman = new Glumac(7, "Nicole", "Kidman", new Date(1967, 6, 20), null,3.7f, "Nicole  Kidman.jpg");
+        Glumac NicoleKidman = new Glumac(7, "Nicole", "Kidman", new Date(1967, 6, 20), null,3.7f, "NicoleKidman.jpg");
         NicoleKidman.setBiografija(getBiografija(7));
 
         NicoleKidman.addFilmovi(new Film(0, "Aquaman", "2018", NicoleKidman));
@@ -94,7 +94,7 @@ public class AdapterPodaci {
         /*
         Renee Zellweger
         http://www.imdb.com/name/nm0000250/bio?ref_=nm_ov_bio_sm */
-        Glumac ReneeZellweger = new Glumac(8, "Reene", "Zellweger", new Date(1969, 4, 25), null,3.3f, "Renee Zellweger.jpg");
+        Glumac ReneeZellweger = new Glumac(8, "Reene", "Zellweger", new Date(1969, 4, 25), null,3.3f, "ReneeZellweger.jpg");
         ReneeZellweger.setBiografija(getBiografija(8));
 
         ReneeZellweger.addFilmovi(new Film(0, "Beba Bridžit Džons ", "2016", ReneeZellweger));

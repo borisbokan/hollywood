@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import com.borcha.hollywood.model.Glumac;
 import com.borcha.hollywood.pomocne.SlikaGlumca;
+import com.borcha.hollywood.pomocne.mojDatum;
 
 /**
  * Created by androiddevelopment on 20.5.17..
@@ -40,17 +41,18 @@ public class AdapterGlumac extends ArrayAdapter<Glumac> {
         LayoutInflater ly=(LayoutInflater)con.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         vi=ly.inflate(R.layout.stavka_liste_glumca,null);
 
-        Glumac glumac = this.getItem(position);
+        final Glumac glumac = this.getItem(position);
 
         imgGlumac = (ImageView) vi.findViewById(R.id.slika_glumca_stavka);
         imePrezime = (TextView) vi.findViewById(R.id.txvPrezimeIme_stavka);
         datumRodSmr=(TextView)vi.findViewById(R.id.txvGodinaRodjenjaSmrti_stavka);
 
-        final SlikaGlumca slika=new SlikaGlumca();
 
-        imgGlumac.setImageDrawable(slika.getSlikaGlumca(con,glumac.getSlika()));
+        final SlikaGlumca slika=new SlikaGlumca(getContext());
+
+        imgGlumac.setImageDrawable(slika.getSlikaGlumca(glumac.getSlika()));
         imePrezime.setText(glumac.getIme() + ", " + glumac.getPrezime());
-        datumRodSmr.setText(glumac.getDatumRodjenja().toString());
+        datumRodSmr.setText(mojDatum.getFormatiranDatum(glumac.getDatumRodjenja()));
 
         vi.setTag(glumac);
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -7,7 +8,7 @@
 
     <ImageView
         android:id="@+id/slika_glumca_stavka"
-        android:layout_width="50dp"
+        android:layout_width="70dp"
         android:layout_height="50dp"
 
         android:layout_alignBottom="@+id/txvGodinaRodjenjaSmrti_stavka"
@@ -22,25 +23,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="3dp"
-        android:layout_toEndOf="@+id/slika_glumca_stavka"
         android:padding="7dp"
         android:text="Ime, Prezime glumca"
         android:textAlignment="viewStart"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toEndOf="@+id/slika_glumca_stavka" />
 
     <TextView
         android:id="@+id/txvGodinaRodjenjaSmrti_stavka"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/txvPrezimeIme_stavka"
         android:layout_below="@+id/txvPrezimeIme_stavka"
-        android:layout_margin="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
         android:padding="5dp"
         android:text="12.10.1946 - 10.2.2014"
         android:textAlignment="center"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_alignStart="@+id/txvPrezimeIme_stavka" />
 
 
 </RelativeLayout>

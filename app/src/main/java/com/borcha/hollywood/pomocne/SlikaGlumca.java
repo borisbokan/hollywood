@@ -16,23 +16,27 @@ import java.io.InputStream;
 
 public class SlikaGlumca {
 
-    private  Context cont;
+    private  Context context;
 
-    public  Drawable getSlikaGlumca(Context _cont,String _patchFileSlika){
-        cont=_cont;
+    public SlikaGlumca(Context _context){
+        this.context=_context;
+    }
+
+    public  Drawable getSlikaGlumca(String _patchFileSlika){
 
         Drawable drawable=null;
         InputStream is=null;
         try {
-            is = cont.getAssets().open(_patchFileSlika);
-            drawable = Drawable.createFromStream(is, null);
+            is = this.context.getAssets().open(_patchFileSlika);
+            drawable= Drawable.createFromStream(is, null);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return  drawable;
 
-        return drawable;
+
     }
 
 
