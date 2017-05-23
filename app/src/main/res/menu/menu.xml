@@ -20,7 +20,7 @@
         android:id="@+id/menu_obrisi_glumac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:icon="@mipmap/ic_obrisi_glumca"
+        android:icon="@mipmap/ic_obrisi_glumcaa"
         app:showAsAction="ifRoom"/>
 
 </menu>

@@ -5,6 +5,7 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -34,12 +35,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private DrawerLayout drawerLayout;
     private RelativeLayout drawerPane;
     private ActionBarDrawerToggle drawerToggle;
-    private boolean landscape=false;
-
-    private int position;
 
     private AdapterPodaci adPodaci;
     public static AdapterGlumac adGlumci;
+
+    private int position=0;
+    private boolean landscape=false;
     private boolean samolista=false;
     private boolean listaIdetalji=false;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         //adPodaci za obradu
         adPodaci=new AdapterPodaci();
@@ -129,19 +132,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
                 listaIdetalji = true;
-            }
-        }
 
+            }
+
+
+        }
         samolista = true;
         listaIdetalji = false;
+        position=0;
+
 
     }
 
 
 
     @Override
-    public void onGlumacSelect(int position) {
-       this.position = position;
+    public void onGlumacSelect(final int _position) {
+          this.position = _position;
+
 
         // Shows a toast message (a pop-up message)
         //Toast.makeText(getBaseContext(), "FirstActivity.onItemSelected()", Toast.LENGTH_SHORT).show();
@@ -149,22 +157,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (landscape) {
             // If the device is in the landscape mode updates detail fragment's content.
             FragmentDetalji detaFrag = (FragmentDetalji) getFragmentManager().findFragmentById(R.id.detalji_frame_fragment);
-            detaFrag.updateContent(this.position);
+            detaFrag.updateContent(_position);
+
+
         } else {
             // If the device is in the portrait mode sets detail fragment's content and replaces master fragment with detail fragment in a fragment transaction.
             FragmentDetalji detaljifrag = new FragmentDetalji();
-            detaljifrag.setContent(position);
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
+            detaljifrag.setContent(_position);
             ft.replace(R.id.lista_frame_fragment, detaljifrag, "detalji_fragment_2");
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(null);
             ft.commit();
 
-           samolista = false;
-           listaIdetalji = true;
-        }
 
+        }
+        samolista = false;
+        listaIdetalji = true;
 
     }
 
@@ -220,8 +229,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("pos",position);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
