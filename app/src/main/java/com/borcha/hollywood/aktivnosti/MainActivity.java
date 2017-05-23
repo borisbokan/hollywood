@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         samolista = true;
         listaIdetalji = false;
-        position = 0;
+
     }
 
 
