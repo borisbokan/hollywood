@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.borcha.hollywood.aktivnosti.MainActivity;
 import com.borcha.hollywood.R;
 import com.borcha.hollywood.model.Glumac;
+import com.borcha.hollywood.synchro.UcitavanjeGlumacaAsync;
 
 /**
  * Created by androiddevelopment on 20.5.17..
@@ -34,6 +36,8 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
 
         vi=inflater.inflate(R.layout.lista_fragment,container,false);
         lvListaGlumaca=(ListView)vi.findViewById(R.id.lvListaGlumaca_lista);
+
+
         return vi;
     }
 
@@ -44,8 +48,15 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new UcitavanjeGlumacaAsync(getActivity()).execute();
+                lvListaGlumaca.setAdapter(MainActivity.getAdapterGlumci());
+            }
+        }).run();
 
-        lvListaGlumaca.setAdapter(MainActivity.getAdapterGlumci());
+
         lvListaGlumaca.setOnItemClickListener(this);
     }
 

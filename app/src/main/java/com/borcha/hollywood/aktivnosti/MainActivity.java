@@ -25,6 +25,7 @@ import com.borcha.hollywood.fragmenti.FragmentDetalji;
 import com.borcha.hollywood.fragmenti.FragmentLista;
 import com.borcha.hollywood.model.AdapterPodaci;
 import com.borcha.hollywood.model.NavigacioniMeni;
+import com.borcha.hollywood.synchro.UcitavanjeGlumacaAsync;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         //adPodaci za obradu
