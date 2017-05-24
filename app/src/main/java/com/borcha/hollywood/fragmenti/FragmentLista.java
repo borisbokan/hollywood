@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,27 +38,21 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
         vi=inflater.inflate(R.layout.lista_fragment,container,false);
         lvListaGlumaca=(ListView)vi.findViewById(R.id.lvListaGlumaca_lista);
 
-
         return vi;
     }
 
-
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new UcitavanjeGlumacaAsync(getActivity()).execute();
-                lvListaGlumaca.setAdapter(MainActivity.getAdapterGlumci());
-            }
-        }).run();
-
-
-        lvListaGlumaca.setOnItemClickListener(this);
+        new UcitavanjeGlumacaAsync(getActivity(),MainActivity.getAdapterGlumci()).execute();
+       /* lvListaGlumaca.setAdapter(MainActivity.getAdapterGlumci());
+        lvListaGlumaca.setOnItemClickListener(this);*/
     }
 
 
@@ -65,15 +60,13 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
 
     @Override
     public void onAttach(Activity activity) {
-
         super.onAttach(activity);
 
-
-        try {
+      /*  try {
             onItemSelectGlumac = (onItemGlumacSelectListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnItemSelectedListener");
-        }
+        }*/
     }
 
     @Override

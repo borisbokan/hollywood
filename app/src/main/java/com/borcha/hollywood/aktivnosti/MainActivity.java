@@ -186,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch (i) {
             case 0:
 
+                new UcitavanjeGlumacaAsync(MainActivity.this,getAdapterGlumci()).execute();
+
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 FragmentLista listaFragment = new FragmentLista();
                 ft.replace(R.id.lista_frame_fragment, listaFragment, "lista_fragment_4");
