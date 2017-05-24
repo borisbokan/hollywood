@@ -27,6 +27,7 @@ public class UcitavanjeGlumacaAsync extends AsyncTask<Void,Void,Void> {
         super();
         this.activity=_activity;
         this.adapterGlumac=_adGlumac;
+        listaGlumacaListener=(FragmentLista.onItemGlumacSelectListener)activity;
     }
 
 
