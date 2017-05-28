@@ -20,6 +20,14 @@
             android:label="@string/podesavanja"
             android:parentActivityName="com.borcha.hollywood.aktivnosti.MainActivity>
         </activity>
+
+
+        //Moj servis za slanje komentara
+        <service android:name=".synchro.MyService"/>
+
+        //Moj risiver za prijem poruke koji prosledjuje poruku NotifM....
+        <receiver android:name=".synchro.MyBroReciver"/>
+
     </application>
 
 </manifest>

@@ -26,8 +26,9 @@ public class MyService extends Service{
     }
 
     @Override
-    public int onStartCommand(Intent intent, @IntDef(value = {Service.START_FLAG_REDELIVERY, Service.START_FLAG_RETRY}, flag = true) int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+    public int onStartCommand(Intent _intent, int flags, int startId) {
+        return super.onStartCommand(_intent, flags, startId);
+
     }
 
     @Override
