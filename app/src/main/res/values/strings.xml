@@ -6,4 +6,6 @@
     <string name="dodaj_glumca">Dodaj glumca</string>
     <string name="ispravi_glumca">Ispravi glumca</string>
     <string name="obrisi_glumca">Obrisši glumca</string>
+    <string name="odustajem_dialog_komentar">Odustajem</string>
+    <string name="posalji_dialog_komentar">Posalji</string>
 </resources>
