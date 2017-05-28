@@ -8,4 +8,6 @@
     <string name="obrisi_glumca">Obrisši glumca</string>
     <string name="odustajem_dialog_komentar">Odustajem</string>
     <string name="posalji_dialog_komentar">Posalji</string>
+    <string name="niste_povezani_net">Zao mi je niste povezani na internet! Proverite konekciju.</string>
+    <string name="notif_komentar">Komentar filma</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.borcha.hollywood.aktivnosti;
 
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,6 +26,11 @@ import com.borcha.hollywood.fragmenti.FragmentDetalji;
 import com.borcha.hollywood.fragmenti.FragmentLista;
 import com.borcha.hollywood.model.AdapterPodaci;
 import com.borcha.hollywood.model.NavigacioniMeni;
+import com.borcha.hollywood.mydialogs.MyCommentDialog;
+import com.borcha.hollywood.pomocne.ReviewerTools;
+import com.borcha.hollywood.synchro.MyAsTaKomentar;
+import com.borcha.hollywood.synchro.MyBroReciver;
+import com.borcha.hollywood.synchro.MyService;
 import com.borcha.hollywood.synchro.myAsyncTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
@@ -42,11 +50,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean landscape=false;
     private boolean samolista=false;
     private boolean listaIdetalji=false;
+    private MyBroReciver simRec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setMyBroReciver();
 
 
         //adPodaci za obradu
@@ -245,7 +256,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_novi_glumac:
-                Toast.makeText(this, "Action " + getString(R.string.dodaj_glumca), Toast.LENGTH_SHORT).show();
+
+                //Saljemo status internet konekcije Servisu
+                int status = ReviewerTools.getConnectivityStatus(getApplicationContext());
+                KomentarDialog(status);
+
                 break;
             case R.id.menu_ispravi_glumac:
                 Toast.makeText(this, "Action " + getString(R.string.ispravi_glumca), Toast.LENGTH_SHORT).show();
@@ -257,6 +272,63 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void KomentarDialog(final int _tipVeze) {
+
+
+
+            final MyCommentDialog mycomm=new MyCommentDialog(this,"Komentar");
+
+            mycomm.setCancelable(true);
+            mycomm.setPositiveButton("Posalji", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    int povezan=_tipVeze;
+                    switch (povezan){
+                        case 1:
+
+                            //Ako je veza preko WiFI
+                            //if(!mycomm.getKomentar().contentEquals(null)) {
+                                Intent konWifi = new Intent(MainActivity.this, MyService.class);
+                                konWifi.putExtra("komentar", mycomm.getKomentar());
+                                startService(konWifi);
+                           // }
+
+                            dialogInterface.dismiss();
+                            break;
+
+
+                        case 2:
+                            //Ako je veza preko Mobile internet
+                            //if(!mycomm.getKomentar().contentEquals(null)) {
+                            Intent konMob = new Intent(MainActivity.this, MyService.class);
+                            konMob.putExtra("komentar", mycomm.getKomentar());
+                            startService(konMob);
+                            // }
+                            dialogInterface.dismiss();
+                            break;
+
+                        case 0:
+                            Toast.makeText(getApplicationContext(),getString(R.string.niste_povezani_net),Toast.LENGTH_SHORT).show();
+                            break;
+
+                        default:
+                            break;
+
+                    }
+
+                }
+            }).setNegativeButton("Otkazi", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                    dialogInterface.dismiss();
+                }
+
+            }).show();
+
+    }
+
 
 
     @Override
@@ -291,6 +363,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    private void setMyBroReciver(){
+        simRec = new MyBroReciver(this);
+
+        //registracija jednog filtera
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("MYSYNC_DATA");
+        registerReceiver(simRec, filter);
+    }
+
+    @Override
+    protected void onPause() {
+
+        //osloboditi resurse koje koristi receiver
+        if(simRec != null){
+            unregisterReceiver(simRec);
+            simRec = null;
+        }
+
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setMyBroReciver();
+    }
 }
 
 

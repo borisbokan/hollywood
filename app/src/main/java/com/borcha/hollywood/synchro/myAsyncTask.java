@@ -34,9 +34,7 @@ public class myAsyncTask extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-
         try {
-
             Thread.sleep(6000);
 
         } catch (InterruptedException e) {

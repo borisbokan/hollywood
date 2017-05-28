@@ -12,7 +12,8 @@
         android:padding="6dp"
         android:text="Unesite komentar"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/etxtKOmentar_dialogComment"
@@ -24,35 +25,13 @@
         android:gravity="top|start"
         android:hint="Unestite komentar..."
         android:inputType="textPersonName"
+        android:lines="30"
+        android:maxLength="300"
+        android:minHeight="194dp"
         android:padding="8dp"
+        android:singleLine="false"
         android:textAlignment="gravity"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:orientation="horizontal"
-        android:padding="4dp">
-
-        <Button
-            android:id="@+id/btnPosalji_dialogComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:text="@string/posalji_dialog_komentar" />
-
-        <Button
-            android:id="@+id/btnOdustajem_dialogComment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:text="@string/odustajem_dialog_komentar" />
-
-    </LinearLayout>
+        android:textSize="18sp"
+        android:typeface="monospace" />
 
 </LinearLayout>
