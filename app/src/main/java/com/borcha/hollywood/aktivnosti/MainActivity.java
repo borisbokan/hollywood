@@ -273,9 +273,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return super.onOptionsItemSelected(item);
     }
 
+    //Metod za izbacivanje mog dialoga za komentarisanje
     private void KomentarDialog(final int _tipVeze) {
-
-
 
             final MyCommentDialog mycomm=new MyCommentDialog(this,"Komentar");
 
@@ -375,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onPause() {
 
-        //osloboditi resurse koje koristi receiver
+        //oslobodjanje resursa koje zauzima risiver
         if(simRec != null){
             unregisterReceiver(simRec);
             simRec = null;
