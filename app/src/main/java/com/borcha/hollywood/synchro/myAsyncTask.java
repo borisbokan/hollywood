@@ -15,7 +15,7 @@ import com.borcha.hollywood.fragmenti.FragmentLista;
  * Created by borcha on 24.05.17..
  */
 
-public class UcitavanjeGlumacaAsync extends AsyncTask<Void,Void,Void> {
+public class myAsyncTask extends AsyncTask<Void,Void,Void> {
 
     private Activity activity;
     private AdapterGlumac adapterGlumac;
@@ -23,7 +23,7 @@ public class UcitavanjeGlumacaAsync extends AsyncTask<Void,Void,Void> {
 
 
 
-    public UcitavanjeGlumacaAsync(Activity _activity, AdapterGlumac _adGlumac) {
+    public myAsyncTask(Activity _activity, AdapterGlumac _adGlumac) {
         super();
         this.activity=_activity;
         this.adapterGlumac=_adGlumac;

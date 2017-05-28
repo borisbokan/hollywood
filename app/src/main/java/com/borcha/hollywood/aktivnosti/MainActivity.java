@@ -1,11 +1,9 @@
 package com.borcha.hollywood.aktivnosti;
 
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +23,7 @@ import com.borcha.hollywood.fragmenti.FragmentDetalji;
 import com.borcha.hollywood.fragmenti.FragmentLista;
 import com.borcha.hollywood.model.AdapterPodaci;
 import com.borcha.hollywood.model.NavigacioniMeni;
-import com.borcha.hollywood.synchro.UcitavanjeGlumacaAsync;
+import com.borcha.hollywood.synchro.myAsyncTask;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
 
@@ -186,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch (i) {
             case 0:
 
-                new UcitavanjeGlumacaAsync(MainActivity.this,getAdapterGlumci()).execute();
+                new myAsyncTask(MainActivity.this,getAdapterGlumci()).execute();
 
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 FragmentLista listaFragment = new FragmentLista();

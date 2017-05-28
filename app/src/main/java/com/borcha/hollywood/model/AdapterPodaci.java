@@ -32,7 +32,7 @@ public class AdapterPodaci {
         /*Charlotte Riley
         http://www.imdb.com/name/nm2731660/bio?ref_=nm_ov_bio_sm*/
 
-        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 12, 29), null,4.5f, "CharlotteRiley.jpg");
+        Glumac CharlotteRiley = new Glumac(2, "Charlotte", "Riley", new Date(1981, 11, 29), null,4.5f, "CharlotteRiley.jpg");
         CharlotteRiley.setBiografija(getBiografija(2));
 
         CharlotteRiley.addFilmovi(new Film(0, "Close to the Enemy (TV Series) ", "2016", CharlotteRiley));
@@ -42,7 +42,7 @@ public class AdapterPodaci {
         /*
         Colin Firth
         http://www.imdb.com/name/nm0000147/bio?ref_=nm_ov_bio_sm     */
-        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 10, 8), null,4.3f, "ColinFirth.jpg");
+        Glumac ColinFirth = new Glumac(3, "Colin", "Firth", new Date(1960, 9, 8), null,4.3f, "ColinFirth.jpg");
         ColinFirth.setBiografija(getBiografija(3));
 
         ColinFirth.addFilmovi(new Film(0, "Mamma Mia: Here We Go Again", "2018", ColinFirth));
@@ -62,7 +62,7 @@ public class AdapterPodaci {
 
 
           /*Jude Law*/
-        Glumac JudeLaw = new Glumac(5, "Jude", "Low", new Date(1972, 12, 29), null,3.6f, "JudeLaw.jpg");
+        Glumac JudeLaw = new Glumac(5, "Jude", "Low", new Date(1972, 11, 29), null,3.6f, "JudeLaw.jpg");
         JudeLaw.setBiografija(getBiografija(5));
 
         JudeLaw.addFilmovi(new Film(0, "The Vote ", "2015", JudeLaw));
@@ -100,7 +100,6 @@ public class AdapterPodaci {
         ReneeZellweger.addFilmovi(new Film(0, "Beba Bridžit Džons ", "2016", ReneeZellweger));
         ReneeZellweger.addFilmovi(new Film(1, "Case 39", "2009", ReneeZellweger));
         ReneeZellweger.addFilmovi(new Film(2, "Bee Movie", "2007", ReneeZellweger));
-
 
 
            /*

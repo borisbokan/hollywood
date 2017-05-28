@@ -2,10 +2,7 @@ package com.borcha.hollywood.fragmenti;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,7 @@ import android.widget.Toast;
 import com.borcha.hollywood.aktivnosti.MainActivity;
 import com.borcha.hollywood.R;
 import com.borcha.hollywood.model.Glumac;
-import com.borcha.hollywood.synchro.UcitavanjeGlumacaAsync;
+import com.borcha.hollywood.synchro.myAsyncTask;
 
 /**
  * Created by androiddevelopment on 20.5.17..
@@ -50,11 +47,9 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        new UcitavanjeGlumacaAsync(getActivity(),MainActivity.getAdapterGlumci()).execute();
-       /* lvListaGlumaca.setAdapter(MainActivity.getAdapterGlumci());
-        lvListaGlumaca.setOnItemClickListener(this);*/
-    }
+        new myAsyncTask(getActivity(),MainActivity.getAdapterGlumci()).execute();
 
+    }
 
 
 
@@ -62,11 +57,8 @@ public class FragmentLista extends Fragment implements AdapterView.OnItemClickLi
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-      /*  try {
-            onItemSelectGlumac = (onItemGlumacSelectListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnItemSelectedListener");
-        }*/
+        new myAsyncTask(getActivity(),MainActivity.getAdapterGlumci()).execute();
+
     }
 
     @Override
