@@ -19,11 +19,12 @@ public class MyService extends Service{
 
     @Override
     public int onStartCommand(Intent _intent, int flags, int startId) {
-        //Uzimam komentar od intenta (MyMainAc...)
+        //Uzimam komentar i tip veze od intenta (MyMainAc...)
         String komentar=_intent.getStringExtra("komentar");
+        int tipveze=_intent.getIntExtra("tipveze",0);
 
         //Prosledjujem komentar asyncTasku
-        new MyAsTaKomentar(getApplicationContext()).execute(komentar);
+        new MyAsTaKomentar(getApplicationContext(),tipveze).execute(komentar);
 
 
         //Servis se sam zaustavlja

@@ -10,10 +10,11 @@ import android.os.AsyncTask;
 
 public class MyAsTaKomentar extends AsyncTask<String,Void,String>{
 
+    private int tipVeze;
     private Context cont;
 
-    public MyAsTaKomentar(Context baseContext) {
-
+    public MyAsTaKomentar(Context baseContext,int _tipVeze) {
+        this.tipVeze=_tipVeze;
         this.cont=baseContext;
 
 
@@ -42,6 +43,7 @@ public class MyAsTaKomentar extends AsyncTask<String,Void,String>{
         super.onPostExecute(proslVrednost);
 
         Intent ints = new Intent("MYSYNC_DATA");
+        ints.putExtra("tipveze",this.tipVeze);
         ints.putExtra("REZULTAT",proslVrednost);
         this.cont.sendBroadcast(ints);
 

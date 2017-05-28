@@ -287,11 +287,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         case 1:
 
                             //Ako je veza preko WiFI
-                            //if(!mycomm.getKomentar().contentEquals(null)) {
-                                Intent konWifi = new Intent(MainActivity.this, MyService.class);
+                            if(!mycomm.getKomentar().contentEquals("")) {
+                                Intent konWifi = new Intent(MainActivity.this, MyService.class);                       konWifi.putExtra("tipveze",povezan);
                                 konWifi.putExtra("komentar", mycomm.getKomentar());
                                 startService(konWifi);
-                           // }
+                            }
 
                             dialogInterface.dismiss();
                             break;
@@ -299,11 +299,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         case 2:
                             //Ako je veza preko Mobile internet
-                            //if(!mycomm.getKomentar().contentEquals(null)) {
+                           if(!mycomm.getKomentar().contentEquals("")) {
                             Intent konMob = new Intent(MainActivity.this, MyService.class);
+                            konMob.putExtra("tipveze",povezan);
                             konMob.putExtra("komentar", mycomm.getKomentar());
                             startService(konMob);
-                            // }
+                           }
                             dialogInterface.dismiss();
                             break;
 

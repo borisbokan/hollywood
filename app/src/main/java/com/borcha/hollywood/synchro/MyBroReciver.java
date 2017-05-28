@@ -4,8 +4,6 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import com.borcha.hollywood.mydialogs.MyCommentDialog;
 import com.borcha.hollywood.pomocne.myNotification;
 
 /**
@@ -15,6 +13,7 @@ import com.borcha.hollywood.pomocne.myNotification;
 public class MyBroReciver extends BroadcastReceiver {
 
     private  Context cont;
+    public static final int broj_zahteva=1;
 
     public MyBroReciver(Context _cont) {
         super();
@@ -26,14 +25,15 @@ public class MyBroReciver extends BroadcastReceiver {
 
         if(_intent.getAction().equals("MYSYNC_DATA")){
            String rezKomentar = _intent.getExtras().getString("REZULTAT");
+           int tipKon=_intent.getIntExtra("tipveze",0);
 
-            notifikacija(this.cont,"Komentar",rezKomentar);
+            notifikacija(this.cont,"Komentar",rezKomentar,tipKon);
         }
     }
 
-    private void notifikacija(Context _context,String _naslov,String _komentar){
-        myNotification obavestenje=new myNotification(_context,_naslov,_komentar);
+    private void notifikacija(Context _context,String _naslov,String _komentar,int _tipVeze){
+        myNotification obavestenje=new myNotification(_context,_naslov,_komentar,_tipVeze);
         NotificationManager notMan=(NotificationManager)cont.getSystemService(Context.NOTIFICATION_SERVICE);
-        notMan.notify(1,obavestenje.build());
+        notMan.notify(broj_zahteva,obavestenje.build());
     }
 }
