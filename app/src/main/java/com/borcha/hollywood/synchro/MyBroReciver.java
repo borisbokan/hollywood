@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.borcha.hollywood.aktivnosti.MainActivity;
 import com.borcha.hollywood.pomocne.myNotification;
 
 /**
@@ -15,15 +17,13 @@ public class MyBroReciver extends BroadcastReceiver {
     private  Context cont;
     public static final int broj_zahteva=1;
 
-    public MyBroReciver(Context _cont) {
-        super();
-        this.cont=_cont;
-    }
+
 
     @Override
     public void onReceive(Context context, Intent _intent) {
 
-        if(_intent.getAction().equals("MYSYNC_DATA")){
+        this.cont=context;
+        if(_intent.getAction().equals(MainActivity.MYACTION_FILTER_MYSYNC_DATA)){
            String rezKomentar = _intent.getExtras().getString("REZULTAT");
            int tipKon=_intent.getIntExtra("tipveze",0);
 

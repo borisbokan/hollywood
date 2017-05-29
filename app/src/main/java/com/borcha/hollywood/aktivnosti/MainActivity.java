@@ -36,6 +36,7 @@ import com.borcha.hollywood.synchro.myAsyncTask;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
 
 
+    public static final String MYACTION_FILTER_MYSYNC_DATA = "MYSYNC_DATA";
     private ArrayList<NavigacioniMeni> stavkeDrawera;
     private CharSequence drawerTitle;
     private ListView drawerList;
@@ -364,11 +365,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private void setMyBroReciver(){
-        simRec = new MyBroReciver(this);
 
         //registracija jednog filtera
         IntentFilter filter = new IntentFilter();
-        filter.addAction("MYSYNC_DATA");
+        filter.addAction(MYACTION_FILTER_MYSYNC_DATA);
+
+        //Startovanje BroadcastReciver-a
+        simRec = new MyBroReciver();
         registerReceiver(simRec, filter);
     }
 
