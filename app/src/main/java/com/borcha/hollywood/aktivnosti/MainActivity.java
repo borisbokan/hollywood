@@ -28,7 +28,6 @@ import com.borcha.hollywood.model.AdapterPodaci;
 import com.borcha.hollywood.model.NavigacioniMeni;
 import com.borcha.hollywood.mydialogs.MyCommentDialog;
 import com.borcha.hollywood.pomocne.ReviewerTools;
-import com.borcha.hollywood.synchro.MyAsTaKomentar;
 import com.borcha.hollywood.synchro.MyBroReciver;
 import com.borcha.hollywood.synchro.MyService;
 import com.borcha.hollywood.synchro.myAsyncTask;
@@ -36,7 +35,7 @@ import com.borcha.hollywood.synchro.myAsyncTask;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,FragmentLista.onItemGlumacSelectListener {
 
 
-    public static final String MYACTION_FILTER_MYSYNC_DATA = "MYSYNC_DATA";
+    public static final String MYACTION_FILTER_COMMENT_ACTOR = "COMMENT_ACTOR";
     private ArrayList<NavigacioniMeni> stavkeDrawera;
     private CharSequence drawerTitle;
     private ListView drawerList;
@@ -365,10 +364,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private void setMyBroReciver(){
-
         //registracija jednog filtera
         IntentFilter filter = new IntentFilter();
-        filter.addAction(MYACTION_FILTER_MYSYNC_DATA);
+        filter.addAction(MYACTION_FILTER_COMMENT_ACTOR);
 
         //Startovanje BroadcastReciver-a
         simRec = new MyBroReciver();

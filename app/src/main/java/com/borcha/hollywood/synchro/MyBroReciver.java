@@ -23,7 +23,7 @@ public class MyBroReciver extends BroadcastReceiver {
     public void onReceive(Context context, Intent _intent) {
 
         this.cont=context;
-        if(_intent.getAction().equals(MainActivity.MYACTION_FILTER_MYSYNC_DATA)){
+        if(_intent.getAction().equals(MainActivity.MYACTION_FILTER_COMMENT_ACTOR)){
            String rezKomentar = _intent.getExtras().getString("REZULTAT");
            int tipKon=_intent.getIntExtra("tipveze",0);
 
