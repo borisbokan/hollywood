@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.borcha.hollywood.aktivnosti.MainActivity;
+
 /**
  * Created by borcha on 28.05.17..
  */
@@ -42,7 +44,7 @@ public class MyAsTaKomentar extends AsyncTask<String,Void,String>{
     protected void onPostExecute(String proslVrednost) {
         super.onPostExecute(proslVrednost);
 
-        Intent ints = new Intent("MYSYNC_DATA");
+        Intent ints = new Intent(MainActivity.MYACTION_FILTER_COMMENT_ACTOR);
         ints.putExtra("tipveze",this.tipVeze);
         ints.putExtra("REZULTAT",proslVrednost);
         this.cont.sendBroadcast(ints);
