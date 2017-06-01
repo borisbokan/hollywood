@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <CheckBoxPreference
-            android:id="@+id/chbPrikaz_obaestenja_notif"
-            android:title="@string/prikaz_obavestenja"
-            android:selectable="true"
-            android:text="Odabrano"
-            android:checked="false">
 
-        </CheckBoxPreference>
+        <PreferenceCategory android:title="Prikazi podataka">
+
+                <CheckBoxPreference
+                    android:id="@+id/chbPrikaz_obaestenja_notif"
+                    android:checked="false"
+                    android:icon="@drawable/ic_notif_komentar"
+                    android:selectable="true"
+                    android:summary="Prikazi podatke u Notification"
+                    android:text="Odabrano"
+                    android:title="@string/prikaz_obavestenja">
+
+                </CheckBoxPreference>
+        </PreferenceCategory>
 
 </PreferenceScreen>
