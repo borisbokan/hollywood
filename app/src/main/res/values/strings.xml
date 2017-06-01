@@ -10,4 +10,5 @@
     <string name="posalji_dialog_komentar">Posalji</string>
     <string name="niste_povezani_net">Zao mi je niste povezani na internet! Proverite konekciju.</string>
     <string name="notif_komentar">Komentar filma</string>
+    <string name="prikaz_obavestenja">Prikazi obavestenje</string>
 </resources>
