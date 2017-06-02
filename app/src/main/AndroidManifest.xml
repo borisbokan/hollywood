@@ -25,6 +25,8 @@
         //Moj servis za slanje komentara
         <service android:name=".synchro.MyService"/>
 
+        //Moj servis za slanje komentara ako je u SharedPreferences eneblovano obavestenje
+
         //Moj risiver za prijem poruke koji prosledjuje poruku NotifM....
         <receiver android:name=".synchro.MyBroReciver"/>
 

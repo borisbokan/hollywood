@@ -4,6 +4,9 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.borcha.hollywood.aktivnosti.MainActivity;
 import com.borcha.hollywood.pomocne.myNotification;
@@ -16,19 +19,33 @@ public class MyBroReciver extends BroadcastReceiver {
 
     private  Context cont;
     public static final int broj_zahteva=1;
-
+    private SharedPreferences obavUkljuceno;
 
 
     @Override
     public void onReceive(Context context, Intent _intent) {
 
-        this.cont=context;
-        if(_intent.getAction().equals(MainActivity.MYACTION_FILTER_COMMENT_ACTOR)){
-           String rezKomentar = _intent.getExtras().getString("REZULTAT");
-           int tipKon=_intent.getIntExtra("tipveze",0);
 
-            notifikacija(this.cont,"Komentar",rezKomentar,tipKon);
+        obavUkljuceno= PreferenceManager.getDefaultSharedPreferences(context);
+        boolean ukljuceno=obavUkljuceno.getBoolean("obav_uklju",false);
+
+        if(ukljuceno){
+            this.cont=context;
+            if(_intent.getAction().equals(MainActivity.MYACTION_FILTER_COMMENT_ACTOR)){
+                String rezKomentar = _intent.getExtras().getString("REZULTAT");
+                int tipKon=_intent.getIntExtra("tipveze",0);
+
+                notifikacija(context,"Komentar",rezKomentar,tipKon);
+            }
+        }else
+        {
+            Toast.makeText(context,"Podesavanja obavestenja iskljucena!",Toast.LENGTH_LONG).show();
         }
+
+
+
+
+
     }
 
     private void notifikacija(Context _context,String _naslov,String _komentar,int _tipVeze){
@@ -36,4 +53,7 @@ public class MyBroReciver extends BroadcastReceiver {
         NotificationManager notMan=(NotificationManager)cont.getSystemService(Context.NOTIFICATION_SERVICE);
         notMan.notify(broj_zahteva,obavestenje.build());
     }
+
+
+
 }

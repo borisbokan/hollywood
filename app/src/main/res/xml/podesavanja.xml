@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="podesavanja">
 
 
         <PreferenceCategory android:title="Prikazi podataka">
 
-                <CheckBoxPreference
+               <CheckBoxPreference android:key="obav_uklju"
                     android:id="@+id/chbPrikaz_obaestenja_notif"
-                    android:checked="false"
+                    android:defaultValue="false"
                     android:icon="@drawable/ic_notif_komentar"
                     android:selectable="true"
                     android:summary="Prikazi podatke u Notification"
@@ -15,5 +16,9 @@
 
                 </CheckBoxPreference>
         </PreferenceCategory>
+
+
+
+
 
 </PreferenceScreen>

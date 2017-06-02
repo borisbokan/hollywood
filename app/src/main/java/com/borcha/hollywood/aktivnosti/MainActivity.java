@@ -4,8 +4,10 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public static final String MYACTION_FILTER_COMMENT_ACTOR = "COMMENT_ACTOR";
+    public static final String MYACTION_FILTER_ENABLE_NOTIF = "NOTIF_ENABLE";
+
     private ArrayList<NavigacioniMeni> stavkeDrawera;
     private CharSequence drawerTitle;
     private ListView drawerList;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean samolista=false;
     private boolean listaIdetalji=false;
     private MyBroReciver simRec;
+    private SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -368,9 +373,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         IntentFilter filter = new IntentFilter();
         filter.addAction(MYACTION_FILTER_COMMENT_ACTOR);
 
+
         //Startovanje BroadcastReciver-a
         simRec = new MyBroReciver();
         registerReceiver(simRec, filter);
+
+
+
+
     }
 
     @Override
